@@ -1,25 +1,29 @@
-import Profile from "./Profile/Profile";
-import { FriendList } from "./FriendList/FriendList";
-import { TransactionHistory } from "./TransactionHistory/TransactionHistory";
-
-import userData from "../userData.json";
-import friends from "../friends.json";
-import transactions from "../transactions.json";
-
+import { useState } from "react";
 import "./App.css";
+import { Header } from "./Description/Description";
+import { Feedback } from "./Feedback/Feedback";
+import { Options } from "./Options/Options";
+
+export const initialState = { good: 0, neutral: 0, bad: 0 };
 
 export default function App() {
+  const [state, setState] = useState(initialState);
+  console.log(state);
+  const updateFeedback = (feedbackType) => {
+    setState((prevState) => ({
+      ...prevState,
+      [feedbackType]: prevState[feedbackType] + 1,
+    }));
+  };
+  const resetState = () => {
+    console.log(`You clicked on Reset button`);
+    setState(initialState);
+  };
   return (
     <div>
-      <Profile
-        username={userData.username}
-        tag={userData.tag}
-        location={userData.location}
-        avatar={userData.avatar}
-        stats={userData.stats}
-      />
-      <FriendList friends={friends} />
-      <TransactionHistory items={transactions} />
+      <Header />
+      <Options updateFeedback={updateFeedback} resetState={resetState} />
+      <Feedback good={state.good} neutral={state.neutral} bad={state.bad} />
     </div>
   );
 }
