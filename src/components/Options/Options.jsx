@@ -1,15 +1,16 @@
-export const Options = ({ updateFeedback, resetState }) => {
+export const Options = ({ updateFeedback, totalFeedback }) => {
   const handleGood = () => {
-    console.log(`You clicked on Good button`);
     updateFeedback("good");
   };
   const handleNeutral = () => {
-    console.log(`You clicked on Neutral button`);
     updateFeedback("neutral");
   };
   const handleBad = () => {
-    console.log(`You clicked on Bad button`);
     updateFeedback("bad");
+  };
+
+  const handleReset = () => {
+    updateFeedback(null);
   };
 
   return (
@@ -23,9 +24,11 @@ export const Options = ({ updateFeedback, resetState }) => {
       <button onClick={handleBad} type="button">
         Bad
       </button>
-      <button onClick={resetState} type="button">
-        Reset
-      </button>
+      {totalFeedback > 0 && (
+        <button onClick={handleReset} type="button">
+          Reset
+        </button>
+      )}
     </>
   );
 };

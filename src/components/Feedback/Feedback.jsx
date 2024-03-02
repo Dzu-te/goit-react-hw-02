@@ -1,6 +1,8 @@
 export const Feedback = ({ good, neutral, bad }) => {
   const total = good + neutral + bad;
-  const positivePercentage = total > 0 ? Math.round((good / total) * 100) : 0;
+  const totalPositive = good + bad;
+  const positivePercentage =
+    totalPositive > 0 ? Math.round((good / totalPositive) * 100) : 0;
 
   return (
     <>
