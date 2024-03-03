@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { Header } from "./Description/Description";
+import { Description } from "./Description/Description";
 import { Feedback } from "./Feedback/Feedback";
+import { Notification } from "./Notification/Notification";
 import { Options } from "./Options/Options";
 
 export const initialState = { good: 0, neutral: 0, bad: 0 };
@@ -31,12 +32,12 @@ export default function App() {
 
   return (
     <div>
-      <Header />
+      <Description />
       <Options updateFeedback={updateFeedback} totalFeedback={totalFeedback} />
       {totalFeedback > 0 ? (
         <Feedback good={state.good} neutral={state.neutral} bad={state.bad} />
       ) : (
-        <p>No feedback yet</p>
+        <Notification />
       )}
     </div>
   );

@@ -1,16 +1,15 @@
+import styles from "./Feedback.module.css";
 export const Feedback = ({ good, neutral, bad }) => {
   const total = good + neutral + bad;
-  const totalPositive = good + bad;
-  const positivePercentage =
-    totalPositive > 0 ? Math.round((good / totalPositive) * 100) : 0;
+  const positivePercentage = total > 0 ? Math.round((good / total) * 100) : 0;
 
   return (
-    <>
-      <h3>Good: {good}</h3>
-      <h3>Neutral: {neutral}</h3>
-      <h3>Bad: {bad}</h3>
-      <h3>Total: {total}</h3>
-      <h3>Positive: {positivePercentage}%</h3>
-    </>
+    <ul className={styles.ulFeedback}>
+      <li>Good: {good}</li>
+      <li>Neutral: {neutral}</li>
+      <li>Bad: {bad}</li>
+      <li>Total: {total}</li>
+      <li>Positive: {positivePercentage}%</li>
+    </ul>
   );
 };
