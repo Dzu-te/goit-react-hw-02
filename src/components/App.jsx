@@ -19,7 +19,7 @@ export default function App() {
 
   const updateFeedback = (feedbackType) => {
     if (!feedbackType) {
-      return setState(initialState);
+      return resetFeedback();
     }
 
     setState((prevState) => ({
@@ -27,6 +27,8 @@ export default function App() {
       [feedbackType]: prevState[feedbackType] + 1,
     }));
   };
+
+  const resetFeedback = () => setState(initialState);
 
   const totalFeedback = state.good + state.neutral + state.bad;
   const positivePercentage =
