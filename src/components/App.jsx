@@ -6,7 +6,7 @@ import { Notification } from "./Notification/Notification";
 import { Options } from "./Options/Options";
 
 export const initialState = { good: 0, neutral: 0, bad: 0 };
-
+const stateFields = Object.keys(initialState);
 export default function App() {
   const [state, setState] = useState(() => {
     const savedState = localStorage.getItem("feedbackState");
@@ -18,14 +18,12 @@ export default function App() {
   }, [state]);
 
   const updateFeedback = (feedbackType) => {
-    if (!feedbackType) {
-      return resetFeedback();
+    if (stateFields.includes(feedbackType)) {
+      setState((prevState) => ({
+        ...prevState,
+        [feedbackType]: prevState[feedbackType] + 1,
+      }));
     }
-
-    setState((prevState) => ({
-      ...prevState,
-      [feedbackType]: prevState[feedbackType] + 1,
-    }));
   };
 
   const resetFeedback = () => setState(initialState);
@@ -39,7 +37,11 @@ export default function App() {
   return (
     <div>
       <Description />
-      <Options updateFeedback={updateFeedback} totalFeedback={totalFeedback} />
+      <Options
+        updateFeedback={updateFeedback}
+        totalFeedback={totalFeedback}
+        resetFeedback={resetFeedback}
+      />
       {totalFeedback > 0 ? (
         <Feedback
           good={state.good}

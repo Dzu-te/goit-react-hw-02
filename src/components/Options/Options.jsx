@@ -1,4 +1,4 @@
-export const Options = ({ updateFeedback, totalFeedback }) => {
+export const Options = ({ updateFeedback, totalFeedback, resetFeedback }) => {
   const handleGood = () => {
     updateFeedback("good");
   };
@@ -7,10 +7,6 @@ export const Options = ({ updateFeedback, totalFeedback }) => {
   };
   const handleBad = () => {
     updateFeedback("bad");
-  };
-
-  const handleReset = () => {
-    updateFeedback(null);
   };
 
   return (
@@ -25,7 +21,7 @@ export const Options = ({ updateFeedback, totalFeedback }) => {
         Bad
       </button>
       {totalFeedback > 0 && (
-        <button onClick={handleReset} type="button">
+        <button onClick={resetFeedback} type="button">
           Reset
         </button>
       )}
